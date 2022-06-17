@@ -33,32 +33,32 @@ const checkIfWalletIsConnected = async () => {
    console.log("No account");
  }
 }
-
-// connect to wallet 
 const connectWallet = async () => {
- try {
-   // get the wallet 
-   const {ethereum} = window;
+  try {
+    const {ethereum} = window;
 
-   // there is no wallet extension 
-   if(!ethereum) {
-     alert("Opps, looks like there is no wallet!");
-     return;
-   }
+    if(!ethereum) {
+      alert("Opps, looks like there is no wallet!");
+      return;
+    }
 
-   const currentNetwork = ethereum.networkVersion;
-   console.log("Current network", currentNetwork);
+    const currentNetwork = ethereum.networkVersion;
+    console.log("Current network", currentNetwork);
 
-   // request access to account 
-   const accounts = await ethereum.request({ method: "eth_requestAccounts"});
+    //check which network the wallet is connected on 
+    if(currentNetwork != 4){
+      // prompt user with a message to switch to network 4 which is the rinkeby network on metamask
+      alert("Opps, only works on Rinkeby! Please change your //network :)");
+      return;
+    };
 
-   //set the account in the state 
-   setCurrentAccount(accounts[0]); 
+    const accounts = await ethereum.request({ method: "eth_requestAccounts"});
+    setCurrentAccount(accounts[0]); 
 
- }
- catch( error){
-   console.log(error);
- }
+  }
+  catch( error){
+    console.log(error);
+  }
 }
 
 //run function checkIfWalletIsConnected when the page loads
