@@ -46,7 +46,7 @@ const connectWallet = async () => {
     console.log("Current network", currentNetwork);
 
     //check which network the wallet is connected on 
-    if(currentNetwork != 4){
+    if(currentNetwork !== 4){
       // prompt user with a message to switch to network 4 which is the rinkeby network on metamask
       alert("Opps, only works on Rinkeby! Please change your //network :)");
       return;
